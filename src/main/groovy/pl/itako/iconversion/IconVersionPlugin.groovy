@@ -22,6 +22,13 @@ class IconVersionPlugin implements Plugin<Project> {
         def variants = project.android.applicationVariants
 
         variants.all { BaseVariant variant ->
+
+            if (!variant.buildType.debuggable) {
+                log.info "IconVersionPlugin. Skipping not debuggable variant: $variant.name"
+                return
+            }
+
+            log.info "IconVersionPlugin. Processing variant: $variant.name"
             variant.outputs.each { BaseVariantOutput output ->
                 output.processResources.doFirst {
                     ProcessAndroidResources task = delegate
