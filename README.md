@@ -3,6 +3,23 @@ icon-version
 
 Android gradle plugin that adds version and flavor name to all app icons.
 
+Add it to your project.
+
+```groovy
+buildscript {
+  repositories {
+    jcenter()
+  }
+
+  dependencies {
+    classpath 'pl.itako:icon-version:1.0.0'
+  }
+}
+
+apply plugin: 'com.android.application'
+apply plugin: 'icon-version'
+```
+
 License
 --------
 
