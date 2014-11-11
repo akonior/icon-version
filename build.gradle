@@ -1,20 +1,26 @@
 buildscript {
     repositories {
         mavenCentral()
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:0.6'
     }
 }
 
 apply plugin: 'groovy'
-apply plugin: 'maven'
+apply plugin: 'maven-publish'
+apply plugin: 'com.jfrog.bintray'
+
+repositories {
+    jcenter()
+    mavenCentral()
+    maven {
+        url 'http://oss.sonatype.org/content/repositories/snapshots/'
+    }
+}
 
 dependencies {
-    repositories {
-        mavenCentral()
-        maven {
-            url 'http://oss.sonatype.org/content/repositories/snapshots/'
-        }
-    }
-
     compile gradleApi()
     compile "org.codehaus.groovy:groovy-all:2.3.6"
     compile 'com.android.tools.build:gradle:0.14.+'
@@ -26,9 +32,44 @@ dependencies {
 group = 'pl.itako'
 version = '1.0.0'
 
-install {
-    repositories.mavenInstaller {
-        pom.artifactId = 'icon-version'
+task sourcesJar(type: Jar, dependsOn: classes) {
+    classifier = 'sources'
+    from sourceSets.main.allSource
+}
+
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    classifier = 'javadoc'
+    from javadoc.destinationDir
+}
+
+artifacts {
+    archives sourcesJar, javadocJar
+}
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            from components.java
+
+            artifact sourcesJar {
+                classifier "sources"
+            }
+
+            artifact javadocJar {
+                classifier "javadoc"
+            }
+        }
     }
 }
 
+bintray {
+    user = bintrayUser
+    key = bintrayKey
+    publications = ['mavenJava']
+    pkg {
+        repo = 'icon-version'
+        name = 'icon-version'
+        desc = 'Android gradle plugin that adds version and flavor name to all app icons.'
+        licenses = ['Apache-2.0']
+    }
+}
