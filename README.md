@@ -20,6 +20,10 @@ apply plugin: 'com.android.application'
 apply plugin: 'icon-version'
 ```
 
+When you apply the plugin and install an app all debug version icons will have flavour, build type and version name.
+
+![Screenshot](doc/icon-version-screenshot.png)
+
 License
 --------
 
