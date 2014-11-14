@@ -1,6 +1,8 @@
 icon-version
 ============
 
+[![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-icon--version-brightgreen.svg?style=flat)](https://android-arsenal.com/details/1/1121)
+
 Android gradle plugin that adds version and flavor name to all debug icons.
 
 ```groovy
