@@ -12,6 +12,12 @@ apply plugin: 'groovy'
 apply plugin: 'maven-publish'
 apply plugin: 'com.jfrog.bintray'
 
+group = 'pl.itako'
+version = '1.0.1'
+
+sourceCompatibility = JavaVersion.VERSION_1_6
+targetCompatibility = JavaVersion.VERSION_1_6
+
 repositories {
     jcenter()
     mavenCentral()
@@ -28,9 +34,6 @@ dependencies {
 
     testCompile 'org.spockframework:spock-core:1.0-groovy-2.3-SNAPSHOT'
 }
-
-group = 'pl.itako'
-version = '1.0.0'
 
 task sourcesJar(type: Jar, dependsOn: classes) {
     classifier = 'sources'
