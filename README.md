@@ -13,7 +13,7 @@ buildscript {
   }
 
   dependencies {
-    classpath 'pl.itako:icon-version:1.0.1'
+    classpath 'pl.itako:icon-version:1.1.1'
   }
 }
 
@@ -22,6 +22,17 @@ apply plugin: 'icon-version'
 ```
 
 When you apply the plugin and install an app all debug version icons will have flavour, build type and version name.
+
+The customisation options can be applied in the app build.gradle as such:
+
+```
+iconVersionConfig {
+    fontSize = 10
+    textColor = [0, 255, 0, 255] // [r, g, b, a]
+    verticalLinePadding = 4 // vertical gap between each line of text
+    backgroundOverlayColor = [255, 0, 0, 255]  // [r, g, b, a]
+}
+```
 
 ![Screenshot](doc/icon-version-screenshot.png)
 
