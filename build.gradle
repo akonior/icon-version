@@ -65,8 +65,8 @@ publishing {
 }
 
 bintray {
-    user = bintrayUser
-    key = bintrayKey
+    user = null // TODO: Replace
+    key = null // TODO: Replace
     publications = ['mavenJava']
     pkg {
         repo = 'icon-version'
