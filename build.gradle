@@ -13,7 +13,7 @@ apply plugin: 'maven-publish'
 apply plugin: 'com.jfrog.bintray'
 
 group = 'pl.itako'
-version = '1.0.1'
+version = '1.1.0'
 
 sourceCompatibility = JavaVersion.VERSION_1_6
 targetCompatibility = JavaVersion.VERSION_1_6
@@ -65,8 +65,8 @@ publishing {
 }
 
 bintray {
-    user = null // TODO: Replace
-    key = null // TODO: Replace
+    user = project.hasProperty("bintrayUser") ? bintrayUser : null
+    key = project.hasProperty("bintrayKey") ? bintrayUser : null
     publications = ['mavenJava']
     pkg {
         repo = 'icon-version'
