@@ -28,6 +28,14 @@ class IconUtils {
             System.err.println("[WARN] java.awt.graphicsenv: " + e)
             System.setProperty("java.awt.graphicsenv", "sun.awt.CGraphicsEnvironment")
         }
+
+        //  Fix for AS issue: Toolkit not found: apple.awt.CToolkit
+        try {
+            Class.forName(System.getProperty("awt.toolkit"))
+        } catch (ClassNotFoundException e) {
+            System.err.println("[WARN] awt.toolkit: " + e)
+            System.setProperty("awt.toolkit", "sun.lwawt.macosx.LWCToolkit")
+        }
     }
 
     /**
