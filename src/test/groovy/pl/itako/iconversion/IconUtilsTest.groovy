@@ -7,7 +7,7 @@ import static pl.itako.iconversion.IconUtils.findIcons
 
 class IconUtilsTest extends Specification {
 
-    def "addWatermark test"() {
+    def "test addWatermark"() {
         given:
         InputStream is = getClass().getResourceAsStream('/test_icons/drawable-xxhdpi/ic_launcher.png')
 
