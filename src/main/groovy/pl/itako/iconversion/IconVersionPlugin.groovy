@@ -18,13 +18,15 @@ class IconVersionPlugin implements Plugin<Project> {
             throw new IllegalStateException("'android' plugin required.")
         }
 
+        // Register extension to allow users to customize
+        IconVersionConfig config = project.extensions.create("iconVersionConfig", IconVersionConfig)
+
         def log = project.logger
-        def variants = project.android.applicationVariants
+        project.android.applicationVariants.all { BaseVariant variant ->
 
-        variants.all { BaseVariant variant ->
-
+            // Dont want to modify release builds
             if (!variant.buildType.debuggable) {
-                log.info "IconVersionPlugin. Skipping not debuggable variant: $variant.name"
+                log.info "IconVersionPlugin. Skipping non-debuggable variant: $variant.name"
                 return
             }
 
@@ -44,7 +46,7 @@ class IconVersionPlugin implements Plugin<Project> {
                             def buildName = variant.flavorName + " " + variant.buildType.name
                             def version = variant.mergedFlavor.versionName
 
-                            addTextToImage(icon, buildName, version)
+                            addTextToImage(icon, config, buildName, version)
                         }
                     }
                 }
@@ -52,4 +54,3 @@ class IconVersionPlugin implements Plugin<Project> {
         }
     }
 }
-
