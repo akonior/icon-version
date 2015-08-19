@@ -19,7 +19,7 @@ class IconVersionPlugin implements Plugin<Project> {
         }
 
         // Register extension to allow users to customize
-        IconVersionExtension iconVersionExtension = project.extensions.create("iconVersionOverlay", IconVersionExtension)
+        IconVersionConfig config = project.extensions.create("iconVersionConfig", IconVersionConfig)
 
         def log = project.logger
         project.android.applicationVariants.all { BaseVariant variant ->
@@ -46,7 +46,7 @@ class IconVersionPlugin implements Plugin<Project> {
                             def buildName = variant.flavorName + " " + variant.buildType.name
                             def version = variant.mergedFlavor.versionName
 
-                            addTextToImage(icon, iconVersionExtension.renderingConfig, buildName, version)
+                            addTextToImage(icon, config, buildName, version)
                         }
                     }
                 }

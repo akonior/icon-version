@@ -64,11 +64,11 @@ class IconUtils {
      * @param config The configuration which controls how the overlay will appear
      * @param lines The lines of text to be displayed
      */
-    static void addTextToImage(File image, RenderingConfig config = RenderingConfig.DEFAULT, String... lines) {
+    static void addTextToImage(File image, IconVersionConfig config, String... lines) {
         final BufferedImage bufferedImage = ImageIO.read(image);
 
-        final Color backgroundOverlayColor = config.backgroundOverlayColor;
-        final Color textColor = config.textColor;
+        final Color backgroundOverlayColor = config.getBackgroundOverlayColor();
+        final Color textColor = config.getTextColor();
         final int fontSize = config.fontSize;
         final int linePadding = config.verticalLinePadding;
         final int imgWidth = bufferedImage.width;
