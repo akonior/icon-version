@@ -12,15 +12,20 @@ import static java.awt.RenderingHints.KEY_TEXT_ANTIALIASING
 import static java.awt.RenderingHints.VALUE_TEXT_ANTIALIAS_ON
 
 /**
- * Various utility methods to find and draw the information on the
+ * Various utility methods to find and draw the information on the app icon
  */
 class IconUtils {
 
     static {
+        // We want our font to come out looking pretty
         System.setProperty("awt.useSystemAAFontSettings", "on");
         System.setProperty("swing.aatext", "true");
     }
 
+    /**
+     * Icon name to search for in the app drawable folders
+     * if none can be found in the app manifest
+     */
     static final String DEFAULT_ICON_NAME = "ic_launcher";
 
     /**
