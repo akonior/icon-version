@@ -74,7 +74,7 @@ class IconUtils {
         final int imgWidth = bufferedImage.width;
         final int imgHeight = bufferedImage.width;
         final int lineCount = lines.length;
-        final int totalLineHeight = (fontSize * (lineCount + 1)) + (linePadding * lineCount);
+        final int totalLineHeight = (fontSize * lineCount) + ((linePadding + 1) * lineCount);
 
         GraphicsEnvironment.localGraphicsEnvironment.createGraphics(bufferedImage).with { g ->
             g.setRenderingHint(KEY_TEXT_ANTIALIASING, VALUE_TEXT_ANTIALIAS_ON);
@@ -84,7 +84,7 @@ class IconUtils {
             g.fillRect(0, imgHeight - totalLineHeight, imgWidth, totalLineHeight);
 
             // Draw each line of our text
-            g.setFont(new Font(Font.MONOSPACED, Font.PLAIN, fontSize));
+            g.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, fontSize));
             g.setColor(textColor)
             lines.reverse().eachWithIndex { String line, int i ->
                 final int strWidth = g.getFontMetrics().stringWidth(line);
@@ -94,7 +94,7 @@ class IconUtils {
                     x = ((imgWidth - strWidth) / 2);
                 }
 
-                int y = imgHeight - (fontSize * (i + 1)) - (i * linePadding);
+                int y = imgHeight - (fontSize * i) - ((i + 1) * linePadding);
 
                 g.drawString(line, x, y);
             }
