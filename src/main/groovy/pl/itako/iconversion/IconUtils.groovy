@@ -20,6 +20,14 @@ class IconUtils {
         // We want our font to come out looking pretty
         System.setProperty("awt.useSystemAAFontSettings", "on");
         System.setProperty("swing.aatext", "true");
+
+        // Fix for Android Studio issue: Could not find class: apple.awt.CGraphicsEnvironment
+        try {
+            Class.forName(System.getProperty("java.awt.graphicsenv"))
+        } catch (ClassNotFoundException e) {
+            System.err.println("[WARN] java.awt.graphicsenv: " + e)
+            System.setProperty("java.awt.graphicsenv", "sun.awt.CGraphicsEnvironment")
+        }
     }
 
     /**
