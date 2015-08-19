@@ -36,7 +36,7 @@ class IconUtils {
 
         def manifestXml = new XmlSlurper().parse(manifestFile)
         def fileName = manifestXml?.application?.@'android:icon'?.text()
-        return fileName == null ? null : fileName?.split("/")[1]
+        return fileName ? fileName?.split("/")[1] : null
     }
 
     /**
@@ -64,7 +64,7 @@ class IconUtils {
      * @param config The configuration which controls how the overlay will appear
      * @param lines The lines of text to be displayed
      */
-    static void addTextToImage(File image, IconVersionConfig config, String... lines) {
+    static void addTextToImage(File image, IconVersionConfig config = IconVersionConfig.DEFAULT, String... lines) {
         final BufferedImage bufferedImage = ImageIO.read(image);
 
         final Color backgroundOverlayColor = config.getBackgroundOverlayColor();

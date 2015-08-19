@@ -7,6 +7,10 @@ import java.awt.Color
  */
 class IconVersionConfig {
 
+    static DEFAULT = new IconVersionConfig()
+
+    static TRANSPARENT = new Color(0, 0, 0, 0)
+
     /**
      * The size of the text to draw on top of the icon
      */
@@ -28,11 +32,11 @@ class IconVersionConfig {
     int[] textColor = [255, 255, 255, 255]
 
     public Color getBackgroundOverlayColor() {
-        return intArrayToColor(backgroundOverlayColor) ?: Color.TRANSPARENT
+        return intArrayToColor(backgroundOverlayColor) ?: TRANSPARENT
     }
 
     public Color getTextColor() {
-        return intArrayToColor(textColor) ?: Color.WHITE
+        return intArrayToColor(textColor) ?: TRANSPARENT
     }
 
     private static Color intArrayToColor(int[] colorParts) {

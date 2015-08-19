@@ -19,6 +19,28 @@ class IconUtilsTest extends Specification {
         "ic_launcher".equals(iconName)
     }
 
+    def "test getIconNameWithNoIconDefined"() {
+        given:
+        def file = getClass().getResource('/AndroidManifest_noIcon.xml').file
+
+        when:
+        String iconName = getIconName(new File(file))
+
+        then:
+        iconName == null
+    }
+
+    def "test getIconNameWithNullManifest"() {
+        given:
+        def file = null as File
+
+        when:
+        String iconName = getIconName(file)
+
+        then:
+        iconName == null
+    }
+
     def "test addWatermark"() {
         given:
         InputStream is = getClass().getResourceAsStream('/test_icons/drawable-xxhdpi/ic_launcher.png')
