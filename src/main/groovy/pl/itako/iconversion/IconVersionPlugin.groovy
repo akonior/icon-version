@@ -44,7 +44,7 @@ class IconVersionPlugin implements Plugin<Project> {
                             log.info "Adding flavor name and version to: " + icon.absolutePath
 
                             def buildName = variant.flavorName + " " + variant.buildType.name
-                            def version = variant.mergedFlavor.versionName
+                            def version = variant.versionName
 
                             addTextToImage(icon, config, buildName, version)
                         }
