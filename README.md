@@ -13,7 +13,7 @@ buildscript {
   }
 
   dependencies {
-    classpath 'pl.itako:icon-version:1.1.1'
+    classpath 'pl.itako:icon-version:1.1.+'
   }
 }
 
