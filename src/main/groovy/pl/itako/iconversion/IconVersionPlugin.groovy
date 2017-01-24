@@ -30,6 +30,9 @@ class IconVersionPlugin implements Plugin<Project> {
                 return
             }
 
+            def buildName = variant.flavorName + " " + variant.buildType.name
+            def version = variant.versionName
+
             log.info "IconVersionPlugin. Processing variant: $variant.name"
             variant.outputs.each { BaseVariantOutput output ->
                 output.processResources.doFirst {
@@ -41,10 +44,7 @@ class IconVersionPlugin implements Plugin<Project> {
                         log.info "Looking for icon files in: $resDir.absolutePath"
 
                         findIcons(resDir, manifest).each { File icon ->
-                            log.info "Adding flavor name and version to: " + icon.absolutePath
-
-                            def buildName = variant.flavorName + " " + variant.buildType.name
-                            def version = variant.versionName
+                            log.info "Adding build information to: " + icon.absolutePath
 
                             addTextToImage(icon, config, buildName, version)
                         }
