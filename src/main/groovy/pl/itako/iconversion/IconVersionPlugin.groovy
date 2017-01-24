@@ -30,8 +30,13 @@ class IconVersionPlugin implements Plugin<Project> {
                 return
             }
 
-            def buildName = variant.flavorName + " " + variant.buildType.name
-            def version = variant.versionName
+            def lines = []
+            if (config.shouldDisplayBuildName) {
+                lines.push(variant.flavorName + " " + variant.buildType.name)
+            }
+            if (config.shouldDisplayVersionName) {
+                lines.push(variant.versionName)
+            }
 
             log.info "IconVersionPlugin. Processing variant: $variant.name"
             variant.outputs.each { BaseVariantOutput output ->
@@ -46,7 +51,7 @@ class IconVersionPlugin implements Plugin<Project> {
                         findIcons(resDir, manifest).each { File icon ->
                             log.info "Adding build information to: " + icon.absolutePath
 
-                            addTextToImage(icon, config, buildName, version)
+                            addTextToImage(icon, config, *lines)
                         }
                     }
                 }
