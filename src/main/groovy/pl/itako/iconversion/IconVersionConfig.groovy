@@ -41,6 +41,11 @@ class IconVersionConfig {
      */
     boolean shouldDisplayVersionName = true;
 
+    /**
+     * Whether the version code should be printed.
+    */
+    boolean shouldDisplayVersionCode = false;
+
     public Color getBackgroundOverlayColor() {
         return intArrayToColor(backgroundOverlayColor) ?: TRANSPARENT
     }

@@ -37,6 +37,9 @@ class IconVersionPlugin implements Plugin<Project> {
             if (config.shouldDisplayVersionName) {
                 lines.push(variant.versionName)
             }
+            if (config.shouldDisplayVersionCode) {
+                lines.push(String.valueOf(variant.versionCode))
+            }
 
             log.info "IconVersionPlugin. Processing variant: $variant.name"
             variant.outputs.each { BaseVariantOutput output ->
