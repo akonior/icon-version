@@ -30,6 +30,17 @@ class IconVersionPlugin implements Plugin<Project> {
                 return
             }
 
+            def lines = []
+            if (config.shouldDisplayBuildName) {
+                lines.push(variant.flavorName + " " + variant.buildType.name)
+            }
+            if (config.shouldDisplayVersionName) {
+                lines.push(variant.versionName)
+            }
+            if (config.shouldDisplayVersionCode) {
+                lines.push(String.valueOf(variant.versionCode))
+            }
+
             log.info "IconVersionPlugin. Processing variant: $variant.name"
             variant.outputs.each { BaseVariantOutput output ->
                 output.processResources.doFirst {
@@ -41,12 +52,9 @@ class IconVersionPlugin implements Plugin<Project> {
                         log.info "Looking for icon files in: $resDir.absolutePath"
 
                         findIcons(resDir, manifest).each { File icon ->
-                            log.info "Adding flavor name and version to: " + icon.absolutePath
+                            log.info "Adding build information to: " + icon.absolutePath
 
-                            def buildName = variant.flavorName + " " + variant.buildType.name
-                            def version = variant.versionName
-
-                            addTextToImage(icon, config, buildName, version)
+                            addTextToImage(icon, config, *lines)
                         }
                     }
                 }

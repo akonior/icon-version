@@ -31,6 +31,21 @@ class IconVersionConfig {
      */
     int[] textColor = [255, 255, 255, 255]
 
+    /**
+     * Whether the build name (flavor + build type) should be printed.
+     */
+    boolean shouldDisplayBuildName = true;
+
+    /**
+     * Whether the version name should be printed.
+     */
+    boolean shouldDisplayVersionName = true;
+
+    /**
+     * Whether the version code should be printed.
+    */
+    boolean shouldDisplayVersionCode = false;
+
     public Color getBackgroundOverlayColor() {
         return intArrayToColor(backgroundOverlayColor) ?: TRANSPARENT
     }
