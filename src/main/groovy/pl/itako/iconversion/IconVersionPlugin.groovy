@@ -25,8 +25,8 @@ class IconVersionPlugin implements Plugin<Project> {
         project.android.applicationVariants.all { BaseVariant variant ->
 
             // Dont want to modify release builds
-            if (!variant.buildType.debuggable) {
-                log.info "IconVersionPlugin. Skipping non-debuggable variant: $variant.name"
+            if (!(config.buildTypes.contains(variant.buildType.name) || variant.buildType.debuggable) ) {
+                log.info "IconVersionPlugin. Skipping variant: $variant.name"
                 return
             }
 
