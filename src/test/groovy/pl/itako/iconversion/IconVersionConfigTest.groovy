@@ -101,4 +101,27 @@ public class IconVersionConfigTest extends Specification {
         then:
         color.equals(IconVersionConfig.TRANSPARENT)
     }
+
+    def "test getBuildTypes"() {
+        given:
+        def input = new IconVersionConfig()
+        input.buildTypes = ["debug", "client"]
+
+        when:
+        def buildTypes = input.buildTypes
+
+        then:
+        buildTypes.equals(["debug", "client"])
+    }
+
+    def "test getDefaultBuildTypes"() {
+        given:
+        def input = new IconVersionConfig()
+
+        when:
+        def buildTypes = input.buildTypes
+
+        then:
+        buildTypes.equals(["debug"])
+    }
 }

@@ -17,6 +17,11 @@ class IconVersionConfig {
     int fontSize = 12
 
     /**
+     * Build types for which the icon should be adapted.
+    */
+    String[] buildTypes = ["debug"]
+
+    /**
      * The amount of vertical space between each line of text
      */
     int verticalLinePadding = 4
