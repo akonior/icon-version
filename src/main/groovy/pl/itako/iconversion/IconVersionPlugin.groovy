@@ -43,18 +43,26 @@ class IconVersionPlugin implements Plugin<Project> {
 
             log.info "IconVersionPlugin. Processing variant: $variant.name"
             variant.outputs.each { BaseVariantOutput output ->
-                output.processResources.doFirst {
-                    ProcessAndroidResources task = delegate
+                output.processResources.doFirst { ProcessAndroidResources task ->
                     variant.outputs.each { BaseVariantOutput variantOutput ->
-                        File manifest = output.processManifest.manifestOutputFile
+                        File manifest = new File(output.processManifest.manifestOutputDirectory, "AndroidManifest.xml")
 
-                        File resDir = task.resDir
-                        log.info "Looking for icon files in: $resDir.absolutePath"
+                        ArrayList<File> resDirs = new ArrayList<>()
+                        variant.sourceSets.forEach { set ->
+                            set.getResDirectories().forEach { resDir ->
+                                if (resDir.exists()) {
+                                    resDirs.add(resDir)
+                                }
+                            }
+                        }
 
-                        findIcons(resDir, manifest).each { File icon ->
-                            log.info "Adding build information to: " + icon.absolutePath
+                        resDirs.each { File resDir ->
+                            log.info "IconVersionPlugin. Looking for icons in dir: ${resDir}"
+                            findIcons(resDir, manifest).each { File icon ->
+                                log.info "Adding build information to: " + icon.absolutePath
 
-                            addTextToImage(icon, config, *lines)
+                                addTextToImage(icon, config, *lines)
+                            }
                         }
                     }
                 }
